@@ -26,16 +26,46 @@ require(['d3', 'topojson'], function(d3, topojson) {
     var path = d3.geo.path()
       .projection(projection);
 
-    /*
-    svg.append('path')
-      .data(countyGeos)
-      .attr('d', path);
-    */
+    // The years to compare
+    var compare = {
+      start: 2010,
+      end: 2014
+    };
 
+    // Calculate percent change
+    var percentChange = function(start, end) {
+      return (end - start) / start;
+    };
+
+    // Extract features from topojson
+    var countyGeo = topojson.feature(counties, counties.objects.tl_2014_us_county_texas).features;
+
+    // Add percent change, so we can set our color scale
+    var data = countyGeo.map(function(d) {
+      d.change = percentChange(d.properties['p' + compare.start], d.properties['p' + compare.end]);
+      return d;
+    });
+
+    // Color scale
+    var color = d3.scale.linear()
+      .domain([
+        d3.min(data, function(d) {
+          return d.change;
+        }),
+        0,
+        d3.max(data, function(d) {
+          return d.change;
+        })
+      ])
+      .range(['rgb(131, 29, 29)', '#fff', 'rgb(8, 48, 107)']);
+
+    // Add paths for counties
     svg.selectAll('.county')
-      .data(topojson.feature(counties, counties.objects.tl_2014_us_county_texas).features)
+      .data(data)
     .enter().append('path')
-      .attr('class', function(d) { return 'county ' + d.id; })
+      .attr('fill', function(d) {
+        return color(d.change);
+      })
       .attr('d', path);
   });
 
