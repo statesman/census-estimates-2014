@@ -1,0 +1,25 @@
+{
+  "name": "census-2014-pops",
+  "version": "0.0.0",
+  "authors": [
+    "Andrew Chavez <adchavez@gmail.com>"
+  ],
+  "main": "index.html",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "bootstrap": "~3.3.0",
+    "font-awesome": "~4.2.0",
+    "almond": "~0.3.0"
+  },
+  "dependencies": {
+    "d3": "~3.5.5",
+    "topojson": "~1.6.18"
+  }
+}
