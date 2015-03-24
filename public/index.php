@@ -70,12 +70,11 @@
 
     <article class="container">
       <div class="header">
-        <h4>Texas state government</h4>
-        <h1>Search Texas government IT contractor spending</h1>
-        <p class="author">Interactive by Andrew Chavez, J. David McSwane and Andrea Ball, American-Statesman</p>
-        <p>An American-Statesman investigation has found that the state’s use of information technology contractors faces little to no oversight. Tens of millions have been paid to at least 3,000 contract workers working for 210 companies, all while avoiding competitive bidding and public scrutiny.</p>
-        <p>Our database uses sales reports made by vendors to the Department of Information Resources to show how much the government agencies have paid for specific contractors since the beginning of fiscal year 2010.</p>
-        <p><a href="http://projects.statesman.com/news/itsac-top-paid/">Related: See how costs for top contractors compare with top-paid state employees <i class="fa fa-angle-double-right"></i></a></p>
+        <h4>Overline</h4>
+        <h1>Hed goes here</h1>
+        <p class="author">Interactive by NAME, American-Statesman</p>
+        <p>Chatter goes here.</p>
+        <p><a href="http://projects.statesman.com/news/itsac-top-paid/">Related: Related story <i class="fa fa-angle-double-right"></i></a></p>
       </div>
 
       <div id="county-map"></div>

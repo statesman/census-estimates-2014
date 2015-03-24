@@ -57,21 +57,46 @@ require(['d3', 'topojson', 'd3-tip'], function(d3, topojson, d3tip) {
           return d.change;
         })
       ])
-      .range(['rgb(131, 29, 29)', '#fff', 'rgb(8, 48, 107)']);
+      .range(['darkred', 'white', 'darkgreen']);
+      //.range(['rgb(131, 29, 29)', '#fff', 'rgb(8, 48, 107)']);
 
     // A formatter for the whole population numbers
     var popFormat = d3.format('0,0');
+    var changeFormat = function(d) {
+      if(d < 0) {
+        d *= -1;
+      }
+      return d3.round(d * 100, 1) + '%';
+    };
+
+    // Helper that generates the population change snippet in the tooltip
+    var popChangeText = function(start, end) {
+      var text = ' <span class="pull-right">';
+      if(end > start) {
+        text += '<i class="fa fa-arrow-up"></i>';
+      }
+      else if (end < start) {
+        text += '<i class="fa fa-arrow-down"></i>';
+      }
+      return text + ' ' + changeFormat(percentChange(start, end)) + '</span>';
+    };
 
     // Enable tool tips
     var tip = d3tip()
-      .attr('class', 'd3-tip')
+      .attr('class', 'popover top')
+      .offset(function() {
+        return [this.getBBox().height * 0.25, 0];
+      })
       .html(function(d) {
-        return '<strong>' + d.id + '</strong><br />' +
-          '2010: ' + popFormat(d.properties.p2010) + '<br />' +
-          '2011: ' + popFormat(d.properties.p2011) + '<br />' +
-          '2012: ' + popFormat(d.properties.p2012) + '<br />' +
-          '2013: ' + popFormat(d.properties.p2013) + '<br />' +
-          '2014: ' + popFormat(d.properties.p2014);
+        return '<h3 class="popover-title">' + d.id + '</h3>' +
+          '<div class="arrow"></div>' +
+          '<div class="popover-content">' +
+            '<strong>2010:</strong> ' + popFormat(d.properties.p2010) + '<br />' +
+            '<strong>2011:</strong> ' + popFormat(d.properties.p2011) + popChangeText(d.properties.p2010, d.properties.p2011) + '<br />' +
+            '<strong>2012:</strong> ' + popFormat(d.properties.p2012) + popChangeText(d.properties.p2011, d.properties.p2012) + '<br />' +
+            '<strong>2013:</strong> ' + popFormat(d.properties.p2013) + popChangeText(d.properties.p2012, d.properties.p2013) + '<br />' +
+            '<strong>2014:</strong> ' + popFormat(d.properties.p2014) + popChangeText(d.properties.p2013, d.properties.p2014) +
+          '</div>';
       });
     svg.call(tip);
 

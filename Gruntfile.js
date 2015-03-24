@@ -97,7 +97,7 @@ module.exports = function(grunt) {
           authKey: 'cmg'
         },
         src: 'public',
-        dest: '/stage_aas/projects/news/template',
+        dest: '/stage_aas/projects/news/census-2014-pops',
         exclusions: ['dist/tmp','Thumbs.db'],
         simple: true,
         useList: false
@@ -109,7 +109,7 @@ module.exports = function(grunt) {
           authKey: 'cmg'
         },
         src: 'public',
-        dest: '/prod_aas/projects/news/template',
+        dest: '/prod_aas/projects/news/census-2014-pops',
         exclusions: ['dist/tmp','Thumbs.db'],
         simple: true,
         useList: false
