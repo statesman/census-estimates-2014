@@ -1,4 +1,4 @@
-require(['d3', 'topojson'], function(d3, topojson) {
+require(['d3', 'topojson', 'd3-tip'], function(d3, topojson, d3tip) {
 
   'use strict';
 
@@ -59,6 +59,22 @@ require(['d3', 'topojson'], function(d3, topojson) {
       ])
       .range(['rgb(131, 29, 29)', '#fff', 'rgb(8, 48, 107)']);
 
+    // A formatter for the whole population numbers
+    var popFormat = d3.format('0,0');
+
+    // Enable tool tips
+    var tip = d3tip()
+      .attr('class', 'd3-tip')
+      .html(function(d) {
+        return '<strong>' + d.id + '</strong><br />' +
+          '2010: ' + popFormat(d.properties.p2010) + '<br />' +
+          '2011: ' + popFormat(d.properties.p2011) + '<br />' +
+          '2012: ' + popFormat(d.properties.p2012) + '<br />' +
+          '2013: ' + popFormat(d.properties.p2013) + '<br />' +
+          '2014: ' + popFormat(d.properties.p2014);
+      });
+    svg.call(tip);
+
     // Add paths for counties
     svg.selectAll('.county')
       .data(data)
@@ -66,7 +82,9 @@ require(['d3', 'topojson'], function(d3, topojson) {
       .attr('fill', function(d) {
         return color(d.change);
       })
-      .attr('d', path);
+      .attr('d', path)
+      .on('mouseover', tip.show)
+      .on('mouseout', tip.hide);
 
     // Add inner boundaries
     svg.append('path')
