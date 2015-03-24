@@ -74,29 +74,11 @@
         <h1>Hed goes here</h1>
         <p class="author">Interactive by NAME, American-Statesman</p>
         <p>Chatter goes here.</p>
-        <div class="row">
-          <label class="col-sm-2 control-label">Years to compare:</label>
-          <div class="col-xs-12 col-sm-5">
-            <select id="start-year" class="form-control">
-              <option selected>2010</option>
-              <option>2011</option>
-              <option>2012</option>
-              <option>2013</option>
-            </select>
-          </div>
-          <div class="col-xs-12 col-sm-5">
-            <select id="end-year" class="form-control">
-              <option>2011</option>
-              <option>2012</option>
-              <option>2013</option>
-              <option selected>2014</option>
-            </select>
-          </div>
-        </div>
         <p><a href="http://projects.statesman.com/news/itsac-top-paid/">Related: Related story <i class="fa fa-angle-double-right"></i></a></p>
       </div>
 
       <div id="county-map"></div>
+      <div id="brush"></div>
     </article>
 
     <div class="clearfix" id="ads">

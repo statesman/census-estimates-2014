@@ -1,14 +1,11 @@
-require(['d3', 'topojson', 'd3-tip'], function(d3, topojson, d3tip) {
+require(['d3', 'topojson', 'd3-tip', 'lib/brush'], function(d3, topojson, d3tip, brush) {
 
   'use strict';
 
-  var startYear = d3.select('#start-year'),
-      endYear = d3.select('#end-year');
-
   // The (default) years to compare
   var compare = {
-    start: startYear[0][0].value,
-    end: endYear[0][0].value
+    start: 2010,
+    end: 2014
   };
 
   // Setup our SVG
@@ -58,7 +55,7 @@ require(['d3', 'topojson', 'd3-tip'], function(d3, topojson, d3tip) {
   // Color scale
   var color = d3.scale.linear()
     .clamp(true)
-    .domain([-0.1, 0, 0.1])
+    .domain([-0.16, 0, 0.16])
     .range(['darkred', 'white', 'darkgreen']);
 
   // A helper to shade the counties baed on percent change
@@ -130,12 +127,16 @@ require(['d3', 'topojson', 'd3-tip'], function(d3, topojson, d3tip) {
         .selectAll('path')
         .call(shadeCounties);
     };
-    startYear.on('input', function() {
-      compare.start = this.value;
-      yearChange();
-    });
-    endYear.on('input', function() {
-      compare.end = this.value;
+    brush.on('brushend', function(evt) {
+      var range = brush.extent();
+      compare.start = range[0];
+      compare.end = range[1];
+
+      var diff = range[1] - range[0];
+
+      var perYear = 0.04;
+      color.domain([perYear * diff * -1, 0, perYear * diff]);
+
       yearChange();
     });
   });
