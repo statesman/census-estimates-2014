@@ -67,6 +67,22 @@ require(['d3', 'topojson'], function(d3, topojson) {
         return color(d.change);
       })
       .attr('d', path);
+
+    // Add inner boundaries
+    svg.append('path')
+      .datum(topojson.mesh(counties, counties.objects.tl_2014_us_county_texas, function(a, b) {
+        return a === b;
+      }))
+      .attr('d', path)
+      .attr('class', 'texas-border');
+
+    // Add outer boundaries
+    svg.append('path')
+      .datum(topojson.mesh(counties, counties.objects.tl_2014_us_county_texas, function(a, b) {
+        return a !== b;
+      }))
+      .attr('d', path)
+      .attr('class', 'county-borders');
   });
 
 });
