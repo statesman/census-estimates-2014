@@ -65,7 +65,7 @@ require(['d3', 'topojson', 'd3-tip', 'lib/brush'], function(d3, topojson, d3tip,
   var color = d3.scale.linear()
     .clamp(true)
     .domain([-0.04, 0, 0.04])
-    .range(['darkred', '#fffefd', 'darkgreen']);
+    .range(['#bf6742', '#fffefd', '#395271']);
 
   // A helper to shade the counties baed on percent change
   var shadeCounties = function() {
