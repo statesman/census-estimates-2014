@@ -6,6 +6,19 @@
 // Add FontAwesome fonts
 @import '../../bower_components/font-awesome/less/font-awesome.less';
 
+// Add stateface
+@font-face {
+    font-family: 'StateFaceRegular';
+    src: url('../../assets/stateface/stateface-regular-webfont.eot');
+    src: url('../../assets/stateface/stateface-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../../assets/stateface/stateface-regular-webfont.woff') format('woff'),
+         url('../../assets/stateface/stateface-regular-webfont.ttf') format('truetype'),
+         url('../../assets/stateface/stateface-regular-webfont.svg#StateFaceRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@import (inline) '../../bower_components/stateface/reference/stateface.css';
+
 // Files for individual modules
 @import 'header.less';
 @import 'footer.less';
@@ -13,6 +26,7 @@
 @import 'tips';
 @import 'legend';
 @import 'brush';
+@import 'statepops';
 
 @media (min-width: @screen-sm-min) {
   .navbar.navbar-default {
@@ -21,8 +35,16 @@
   }
 }
 
+.fa-arrow-down {
+  color: darkred;
+}
+.fa-arrow-up {
+  color: darkgreen;
+}
+
 #county-map {
   overflow: hidden;
+  margin-bottom: @line-height-computed * 2;
 
   svg {
     path {

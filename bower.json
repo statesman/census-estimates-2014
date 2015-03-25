@@ -17,7 +17,8 @@
     "bootstrap": "~3.3.0",
     "font-awesome": "~4.2.0",
     "almond": "~0.3.0",
-    "d3-tip": "~0.6.6"
+    "d3-tip": "~0.6.6",
+    "stateface": "propublica/stateface"
   },
   "dependencies": {
     "d3": "~3.5.5",

@@ -1,12 +1,6 @@
-require(['d3', 'topojson', 'd3-tip', 'lib/brush'], function(d3, topojson, d3tip, brush) {
+require(['d3', 'topojson', 'd3-tip', 'lib/brush', 'lib/utils', 'lib/states'], function(d3, topojson, d3tip, brush, utils, states) {
 
   'use strict';
-
-  // The (default) years to compare
-  var compare = {
-    start: 2013,
-    end: 2014
-  };
 
   // Setup our SVG
   var aspect = 960 / 900;
@@ -35,31 +29,8 @@ require(['d3', 'topojson', 'd3-tip', 'lib/brush'], function(d3, topojson, d3tip,
   var path = d3.geo.path()
     .projection(projection);
 
-  // Calculate percent change
-  var percentChange = function(start, end) {
-    return (end - start) / start;
-  };
-
   // A formatter for the whole population numbers
   var popFormat = d3.format('0,0');
-  var changeFormat = function(d, pos) {
-    if(d < 0 && pos) {
-      d *= -1;
-    }
-    return d3.round(d * 100, 1) + '%';
-  };
-
-  // Helper that generates the population change snippet in the tooltip
-  var popChangeText = function(start, end) {
-    var text = ' <span class="pull-right">';
-    if(end > start) {
-      text += '<i class="fa fa-arrow-up"></i>';
-    }
-    else if (end < start) {
-      text += '<i class="fa fa-arrow-down"></i>';
-    }
-    return text + ' ' + changeFormat(percentChange(start, end), true) + '</span>';
-  };
 
   // Color scale
   var color = d3.scale.linear()
@@ -70,7 +41,7 @@ require(['d3', 'topojson', 'd3-tip', 'lib/brush'], function(d3, topojson, d3tip,
   // A helper to shade the counties baed on percent change
   var shadeCounties = function() {
     this.attr('fill', function(d) {
-      return color(percentChange(d.properties['p' + compare.start], d.properties['p' + compare.end]));
+      return color(utils.percentChange(d.properties['p' + utils.compare.start], d.properties['p' + utils.compare.end]));
     });
   };
 
@@ -102,7 +73,7 @@ require(['d3', 'topojson', 'd3-tip', 'lib/brush'], function(d3, topojson, d3tip,
     .attr('x', legendRectSize + legendSpacing * 2)
     .attr('y', legendRectSize - legendSpacing + 1)
     .text(function(d) {
-      return changeFormat(d);
+      return utils.changeFormat(d);
     });
 
   d3.json('data/counties.topojson', function(err, counties) {
@@ -125,10 +96,10 @@ require(['d3', 'topojson', 'd3-tip', 'lib/brush'], function(d3, topojson, d3tip,
           '<div class="arrow"></div>' +
           '<div class="popover-content">' +
             '<strong>2010:</strong> ' + popFormat(d.properties.p2010) + '<br />' +
-            '<strong>2011:</strong> ' + popFormat(d.properties.p2011) + popChangeText(d.properties.p2010, d.properties.p2011) + '<br />' +
-            '<strong>2012:</strong> ' + popFormat(d.properties.p2012) + popChangeText(d.properties.p2011, d.properties.p2012) + '<br />' +
-            '<strong>2013:</strong> ' + popFormat(d.properties.p2013) + popChangeText(d.properties.p2012, d.properties.p2013) + '<br />' +
-            '<strong>2014:</strong> ' + popFormat(d.properties.p2014) + popChangeText(d.properties.p2013, d.properties.p2014) +
+            '<strong>2011:</strong> ' + popFormat(d.properties.p2011) + utils.popChangeText(d.properties.p2010, d.properties.p2011) + '<br />' +
+            '<strong>2012:</strong> ' + popFormat(d.properties.p2012) + utils.popChangeText(d.properties.p2011, d.properties.p2012) + '<br />' +
+            '<strong>2013:</strong> ' + popFormat(d.properties.p2013) + utils.popChangeText(d.properties.p2012, d.properties.p2013) + '<br />' +
+            '<strong>2014:</strong> ' + popFormat(d.properties.p2014) + utils.popChangeText(d.properties.p2013, d.properties.p2014) +
           '</div>';
       });
     svg.call(tip);
@@ -169,8 +140,8 @@ require(['d3', 'topojson', 'd3-tip', 'lib/brush'], function(d3, topojson, d3tip,
     };
     brush.on('brushend', function(evt) {
       var range = brush.extent();
-      compare.start = range[0];
-      compare.end = range[1];
+      utils.compare.start = range[0];
+      utils.compare.end = range[1];
 
       var diff = range[1] - range[0];
 
@@ -181,10 +152,11 @@ require(['d3', 'topojson', 'd3-tip', 'lib/brush'], function(d3, topojson, d3tip,
         .select('text')
         .data(color.domain().reverse())
         .text(function(d) {
-          return changeFormat(d);
+          return utils.changeFormat(d);
         });
 
       yearChange();
+      states.update();
     });
   });
 
