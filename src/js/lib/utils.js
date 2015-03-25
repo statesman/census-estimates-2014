@@ -18,7 +18,7 @@ define(function() {
     if(d < 0 && pos) {
       d *= -1;
     }
-    return d3.round(d * 100, 1) + '%';
+    return d3.round(d * 100, 2) + '%';
   };
 
   // Helper that generates the population change snippet in the tooltip

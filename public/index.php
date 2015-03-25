@@ -6,10 +6,10 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <?php
       $meta = array(
-        'title' => 'Search Texas government IT contractor spending',
+        'title' => 'Comparing 5 years of population changes for Texas counties',
         'description' => 'Our database uses sales reports made by vendors to the Department of Information Resources to show how much the government agencies have paid for specific contractors since the beginning of fiscal year 2010.',
-        'thumbnail' => 'http://projects.statesman.com/news/itsac-database/assets/share.png',
-        'url' => 'http://projects.statesman.com/news/itsac-database/',
+        'thumbnail' => 'http://projects.statesman.com/news/census-2014-pops/assets/share.png',
+        'url' => 'http://projects.statesman.com/news/census-2014-pops/',
         'twitter' => 'statesman'
       );
     ?>
@@ -70,11 +70,11 @@
 
     <article class="container">
       <div class="header">
-        <h4>Overline</h4>
-        <h1>Hed goes here</h1>
-        <p class="author">Interactive by NAME, American-Statesman</p>
-        <p>Chatter goes here.</p>
-        <p><a href="http://projects.statesman.com/news/itsac-top-paid/">Related: Related story <i class="fa fa-angle-double-right"></i></a></p>
+        <h4>Census</h4>
+        <h1><?php echo $meta['title']; ?></h1>
+        <p class="author">Interactive by Andrew Chavez, American-Statesman</p>
+        <p>The chart below shows percentage growth in population in Texas counties and in each state by year. Use the slider below the map to compare different years. Hover over a county to see detailed population information.</p>
+        <?php /*<p><a href="http://projects.statesman.com/news/itsac-top-paid/">Related: Related story <i class="fa fa-angle-double-right"></i></a></p> */?>
       </div>
 
       <div class="row">
@@ -84,6 +84,7 @@
         </div>
         <div class="col-xs-12 col-md-4">
           <div id="state-pops" class="row"></div>
+          <p><small><em>Source: U.S. Census Bureau 2014 County and Metro Area Population Estimates</em></small></p>
         </div>
       </div>
     </article>
