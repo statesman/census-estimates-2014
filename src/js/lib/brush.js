@@ -1,7 +1,9 @@
 define(['d3'], function(d3) {
+  var el = d3.select('#brush'),
+      elWidth = el.node().getBoundingClientRect().width - 15;
 
   var margin = {top: 0, right: 15, bottom: 30, left: 15},
-    width = 960 - margin.left - margin.right,
+    width = elWidth - margin.left - margin.right,
     height = 50 - margin.top - margin.bottom;
 
   var x = d3.scale.linear()
@@ -13,7 +15,7 @@ define(['d3'], function(d3) {
       .extent([2010, 2014])
       .on('brush', brushed);
 
-  var svg = d3.select('#brush').append('svg')
+  var svg = el.append('svg')
     .attr('width', width + margin.left + margin.right)
     .attr('height', height + margin.top + margin.bottom)
   .append('g')

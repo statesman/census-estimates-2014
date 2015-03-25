@@ -77,8 +77,12 @@
         <p><a href="http://projects.statesman.com/news/itsac-top-paid/">Related: Related story <i class="fa fa-angle-double-right"></i></a></p>
       </div>
 
-      <div id="county-map"></div>
-      <div id="brush"></div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-8">
+          <div id="county-map"></div>
+          <div id="brush"></div>
+        </div>
+      </div>
     </article>
 
     <div class="clearfix" id="ads">

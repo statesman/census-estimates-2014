@@ -20,21 +20,25 @@
   }
 }
 
-#county-map svg {
-  path {
-    cursor: pointer;
-  }
+#county-map {
+  overflow: hidden;
 
-  .county-borders {
-    fill: none;
-    stroke: @gray-light;
-    stroke-width: 1;
-  }
+  svg {
+    path {
+      cursor: pointer;
+    }
 
-  .texas-border {
-    fill: none;
-    stroke: @gray-dark;
-    stroke-width: 1.5;
+    .county-borders {
+      fill: none;
+      stroke: @gray-light;
+      stroke-width: 1;
+    }
+
+    .texas-border {
+      fill: none;
+      stroke: @gray-dark;
+      stroke-width: 1.5;
+    }
   }
 }
 

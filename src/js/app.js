@@ -9,17 +9,26 @@ require(['d3', 'topojson', 'd3-tip', 'lib/brush'], function(d3, topojson, d3tip,
   };
 
   // Setup our SVG
-  var width = 960, height = 900;
+  var aspect = 960 / 900;
 
-  var svg = d3.select('#county-map').append('svg')
+  var el = d3.select('#county-map'),
+      width = el.node().getBoundingClientRect().width,
+      height = width / aspect;
+
+  var svg = el.append('svg')
       .attr('width', width)
       .attr('height', height);
+
+  var scale = function() {
+    return 5.5 * width;
+  };
 
   // Setup the projection
   var projection = d3.geo.conicConformal()
     .center([2, 31.15])
     .rotate([102, 0])
-    .scale(5550)
+//    .scale(5550)
+    .scale(scale())
     .translate([width / 2, height / 2]);
 
   // Path generator
