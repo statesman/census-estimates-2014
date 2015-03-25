@@ -73,6 +73,7 @@
         <h4>Census</h4>
         <h1><?php echo $meta['title']; ?></h1>
         <p class="author">Interactive by Andrew Chavez, American-Statesman</p>
+        <p>A new release of U.S. Census Bureau data showed once again that the Austin area is the fastest-growing large metro area in the country, as it has been every year since 2010. Also, the influx of people moving into the five-county area centered around Austin is accelerating.</p>
         <p>The chart below shows percentage growth in population in Texas counties and in each state by year. Use the slider below the map to compare different years. Hover over a county to see detailed population information.</p>
         <?php /*<p><a href="http://projects.statesman.com/news/itsac-top-paid/">Related: Related story <i class="fa fa-angle-double-right"></i></a></p> */?>
       </div>
