@@ -79,11 +79,11 @@
       </div>
 
       <div class="row">
-        <div class="col-xs-12 col-md-8">
+        <div class="col-xs-12 col-md-7 col-lg-8">
           <div id="county-map"></div>
           <div id="brush"></div>
         </div>
-        <div class="col-xs-12 col-md-4">
+        <div class="col-xs-12 col-md-5 col-lg-4">
           <div id="state-pops" class="row"></div>
           <p><small><em>Source: U.S. Census Bureau 2014 County and Metro Area Population Estimates</em></small></p>
         </div>
