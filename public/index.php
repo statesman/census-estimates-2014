@@ -6,7 +6,7 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <?php
       $meta = array(
-        'title' => 'Comparing 5 years of population changes for Texas counties',
+        'title' => 'Comparing 5 years of population changes in Texas county-by-county',
         'description' => 'Use our chart to explore annual population growth in Texas counties and each state by year.',
         'thumbnail' => 'http://projects.statesman.com/news/census-2014-pops/assets/share.png',
         'url' => 'http://projects.statesman.com/news/census-2014-pops/',
@@ -71,10 +71,10 @@
     <article class="container">
       <div class="header">
         <h4>Census</h4>
-        <h1><?php echo $meta['title']; ?></h1>
+        <h1>Population changes in Texas counties since 2010</h1>
         <p class="author">Interactive by Andrew Chavez, American-Statesman<br />Published March 26, 2015</p>
-        <p>A new release of U.S. Census Bureau data showed once again that the Austin area is the fastest-growing large metro area in the country, as it has been every year since 2010. Also, the influx of people moving into the five-county area centered around Austin is accelerating.</p>
-        <p>The chart below shows percentage growth in population in Texas counties and in each state by year. Use the slider below the map to compare different years. Hover over a county to see detailed population information.</p>
+        <p>A new release of U.S. Census Bureau data published Thursday shows that among large metro areas with more than 1 million people, the Austin area is still growing faster than any other major city, as it has been every year since 2010. Also, the influx of people moving into the five-county area centered around Austin is accelerating.</p>
+        <p>The chart below shows percentage change in population in Texas counties and in each state by year. Use the slider below the map to compare different years. Hover over a county to see detailed population information.</p>
         <?php /*<p><a href="http://projects.statesman.com/news/itsac-top-paid/">Related: Related story <i class="fa fa-angle-double-right"></i></a></p> */?>
       </div>
 
