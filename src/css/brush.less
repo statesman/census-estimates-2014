@@ -1,5 +1,6 @@
 .axis text {
-  font: 11px sans-serif;
+  font: 11px @font-family-sans-serif;
+  font-weight: bold;
 }
 
 .axis path {
@@ -13,22 +14,13 @@
 }
 
 .grid-background {
-  fill: #ddd;
-}
-
-.grid line,
-.grid path {
-  fill: none;
-  stroke: #fff;
-  shape-rendering: crispEdges;
-}
-
-.grid .minor.tick line {
-  stroke-opacity: .5;
+  fill: @gray-lighter;
 }
 
 .brush .extent {
-  stroke: #000;
-  fill-opacity: .125;
-  shape-rendering: crispEdges;
+  fill: @brand-primary;
+}
+
+.brush .handle {
+  fill: @brand-primary;
 }

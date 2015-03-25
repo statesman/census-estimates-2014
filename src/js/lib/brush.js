@@ -12,7 +12,7 @@ define(['d3'], function(d3) {
 
   var brush = d3.svg.brush()
       .x(x)
-      .extent([2010, 2014])
+      .extent([2013, 2014])
       .on('brush', brushed);
 
   var svg = el.append('svg')
@@ -23,8 +23,11 @@ define(['d3'], function(d3) {
 
   svg.append("rect")
     .attr("class", "grid-background")
+    .attr("rx", 6)
+    .attr("ry", 6)
+    .attr('y', 4)
     .attr("width", width)
-    .attr("height", height);
+    .attr("height", 12);
 
   svg.append("g")
     .attr("class", "x axis")
@@ -33,6 +36,9 @@ define(['d3'], function(d3) {
       .scale(x)
       .orient("bottom")
       .ticks(5)
+      .tickFormat(function(d) {
+        return d.toString();
+      })
       .tickPadding(0))
     .selectAll("text")
       .attr("y", 10);
@@ -41,8 +47,18 @@ define(['d3'], function(d3) {
     .attr("class", "brush")
     .call(brush);
 
-  gBrush.selectAll("rect")
-    .attr("height", height);
+  var handleWidth = 6;
+  gBrush.selectAll('.resize').append('rect')
+    .attr('class', 'handle')
+    .attr('x', handleWidth / 2 * -1)
+    .attr('height', height)
+    .attr("rx", 0)
+    .attr("ry", 2)
+    .attr('width', handleWidth);
+
+  gBrush.select('.extent')
+    .attr('y', 8)
+    .attr('height', 4);
 
   function brushed() {
     var extent0 = brush.extent(),

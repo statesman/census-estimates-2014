@@ -4,7 +4,7 @@ require(['d3', 'topojson', 'd3-tip', 'lib/brush'], function(d3, topojson, d3tip,
 
   // The (default) years to compare
   var compare = {
-    start: 2010,
+    start: 2013,
     end: 2014
   };
 
@@ -64,7 +64,7 @@ require(['d3', 'topojson', 'd3-tip', 'lib/brush'], function(d3, topojson, d3tip,
   // Color scale
   var color = d3.scale.linear()
     .clamp(true)
-    .domain([-0.16, 0, 0.16])
+    .domain([-0.04, 0, 0.04])
     .range(['darkred', '#fffefd', 'darkgreen']);
 
   // A helper to shade the counties baed on percent change
