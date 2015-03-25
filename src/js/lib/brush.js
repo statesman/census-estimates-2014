@@ -47,7 +47,7 @@ define(['d3', 'lib/utils'], function(d3, utils) {
     .attr("class", "brush")
     .call(brush);
 
-  var handleWidth = 6;
+  var handleWidth = (width < 500) ? 20 : 6;
   gBrush.selectAll('.resize').append('rect')
     .attr('class', 'handle')
     .attr('x', handleWidth / 2 * -1)
