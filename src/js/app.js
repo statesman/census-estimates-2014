@@ -21,7 +21,6 @@ require(['d3', 'topojson', 'd3-tip', 'lib/brush', 'lib/utils', 'lib/states'], fu
   var projection = d3.geo.conicConformal()
     .center([2, 31.15])
     .rotate([102, 0])
-//    .scale(5550)
     .scale(scale())
     .translate([width / 2, height / 2]);
 
@@ -78,9 +77,6 @@ require(['d3', 'topojson', 'd3-tip', 'lib/brush', 'lib/utils', 'lib/states'], fu
 
   d3.json('data/counties.topojson', function(err, counties) {
     if (err) return console.error(err);
-
-    // Get the county geos from the topo file
-    var countyGeos = topojson.feature(counties, counties.objects.tl_2014_us_county_texas);
 
     // Extract features from topojson
     var countyGeo = topojson.feature(counties, counties.objects.tl_2014_us_county_texas).features;
@@ -158,6 +154,36 @@ require(['d3', 'topojson', 'd3-tip', 'lib/brush', 'lib/utils', 'lib/states'], fu
       yearChange();
       states.update();
     });
+
+    d3.select(window).on('resize', utils.debounce(resize, 350));
+
+    function resize() {
+      // Get new element size
+      width = el.node().getBoundingClientRect().width;
+      height = width / aspect;
+
+      // Resize SVG
+      svg
+        .attr('width', width)
+        .attr('height', height);
+
+      // Update projection based on new size
+      projection
+        .scale(scale())
+        .translate([width / 2, height / 2]);
+
+      // Redraw counties
+      d3.selectAll('.counties path')
+        .attr('d', path);
+
+      // And county border
+      d3.select('path.county-borders')
+        .attr('d', path);
+
+      // And state border
+      d3.select('path.texas-border')
+        .attr('d', path);
+    }
   });
 
 });

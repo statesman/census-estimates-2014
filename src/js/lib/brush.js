@@ -1,4 +1,4 @@
-define(['d3'], function(d3) {
+define(['d3', 'lib/utils'], function(d3, utils) {
   var el = d3.select('#brush'),
       elWidth = el.node().getBoundingClientRect().width - 15;
 
@@ -83,6 +83,31 @@ define(['d3'], function(d3) {
     }
 
     d3.select(this).call(brush.extent(extent1));
+  }
+
+  // Handle window resizing
+  d3.select(window).on('resize.brush', utils.debounce(resize, 350));
+  function resize() {
+    // Get the new size of the parent el
+    elWidth = el.node().getBoundingClientRect().width - 15;
+    width = elWidth - margin.left - margin.right;
+
+    // Update the scale
+    x.range([0, width]);
+
+    // Then resize the weight-dependent parts
+    svg.attr('width', width + margin.left + margin.right);
+    svg.select('.grid-background').attr("width", width);
+
+    // Redraw the axis
+    var axis = d3.select('.x.axis');
+    axis.selectAll('.tick')
+      .attr('transform', function(d) {
+        return 'translate(' + x(d) + ', 0)';
+      });
+
+    // And fire the brush callback to reposition it
+    brush.event(d3.select(".brush"));
   }
 
   return brush;
