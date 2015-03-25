@@ -1,6 +1,9 @@
 /* Interactives header */
 .header {
-  margin-top: @line-height-computed * 2;
+  margin-top: @line-height-computed;
+  @media(min-width: @screen-sm-min) {
+    margin-top: @line-height-computed * 2;
+  }
   margin-bottom: @line-height-computed;
   > h2 {
     margin: @padding-base-vertical 0;
