@@ -42,8 +42,8 @@ require(['d3', 'topojson', 'd3-tip', 'lib/brush'], function(d3, topojson, d3tip,
 
   // A formatter for the whole population numbers
   var popFormat = d3.format('0,0');
-  var changeFormat = function(d) {
-    if(d < 0) {
+  var changeFormat = function(d, pos) {
+    if(d < 0 && pos) {
       d *= -1;
     }
     return d3.round(d * 100, 1) + '%';
@@ -58,7 +58,7 @@ require(['d3', 'topojson', 'd3-tip', 'lib/brush'], function(d3, topojson, d3tip,
     else if (end < start) {
       text += '<i class="fa fa-arrow-down"></i>';
     }
-    return text + ' ' + changeFormat(percentChange(start, end)) + '</span>';
+    return text + ' ' + changeFormat(percentChange(start, end), true) + '</span>';
   };
 
   // Color scale
@@ -73,6 +73,37 @@ require(['d3', 'topojson', 'd3-tip', 'lib/brush'], function(d3, topojson, d3tip,
       return color(percentChange(d.properties['p' + compare.start], d.properties['p' + compare.end]));
     });
   };
+
+  // Legend
+  var legendRectSize = 15;
+  var legendSpacing = 4;
+  var legendBox = svg.append('g')
+    .attr('transform', 'translate(25, 35)')
+    .attr('class', 'legend');
+  legendBox.append('text')
+    .attr('class', 'label-head')
+    .text('Legend');
+  var legend = legendBox.selectAll('.legend-item')
+    .data(color.domain().reverse())
+    .enter()
+    .append('g')
+    .attr('class', 'legend-item')
+    .attr('transform', function(d, i) {
+      var height = legendRectSize + legendSpacing;
+      var offset =  10;
+      var vert = i * height + offset;
+      return 'translate(0,' + vert + ')';
+    });
+  legend.append('rect')
+    .attr('width', legendRectSize)
+    .attr('height', legendRectSize)
+    .style('fill', color);
+  legend.append('text')
+    .attr('x', legendRectSize + legendSpacing * 2)
+    .attr('y', legendRectSize - legendSpacing + 1)
+    .text(function(d) {
+      return changeFormat(d);
+    });
 
   d3.json('data/counties.topojson', function(err, counties) {
     if (err) return console.error(err);
@@ -145,6 +176,13 @@ require(['d3', 'topojson', 'd3-tip', 'lib/brush'], function(d3, topojson, d3tip,
 
       var perYear = 0.04;
       color.domain([perYear * diff * -1, 0, perYear * diff]);
+
+      d3.selectAll('.legend-item')
+        .select('text')
+        .data(color.domain().reverse())
+        .text(function(d) {
+          return changeFormat(d);
+        });
 
       yearChange();
     });
