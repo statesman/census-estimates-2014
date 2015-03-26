@@ -75,7 +75,7 @@
         <p class="author">Interactive by Andrew Chavez, American-Statesman<br />Published March 26, 2015</p>
         <p>A new release of U.S. Census Bureau data published Thursday shows that among large metro areas with more than 1 million people, the Austin area is still growing faster than any other major city, as it has been every year since 2010. Also, the influx of people moving into the five-county area centered around Austin is accelerating.</p>
         <p>The chart below shows percentage change in population in Texas counties and in each state by year. Use the slider below the map to compare different years. Hover over a county to see detailed population information.</p>
-        <?php /*<p><a href="http://projects.statesman.com/news/itsac-top-paid/">Related: Related story <i class="fa fa-angle-double-right"></i></a></p> */?>
+        <p><a href="http://www.mystatesman.com/news/news/local/austin-metro-area-posts-high-growth-again-but-some/nkff7/">Related: Austin metro area posts high growth again — but some ask, at what cost? <i class="fa fa-angle-double-right"></i></a></p>
       </div>
 
       <div class="row">

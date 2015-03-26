@@ -72,7 +72,11 @@ require(['d3', 'topojson', 'd3-tip', 'lib/brush', 'lib/utils', 'lib/states'], fu
     .attr('x', legendRectSize + legendSpacing * 2)
     .attr('y', legendRectSize - legendSpacing + 1)
     .text(function(d) {
-      return utils.changeFormat(d);
+      var p = utils.changeFormat(d);
+      if(p !== '0%') {
+        p += '+';
+      }
+      return p;
     });
 
   d3.json('data/counties.topojson', function(err, counties) {
@@ -148,7 +152,11 @@ require(['d3', 'topojson', 'd3-tip', 'lib/brush', 'lib/utils', 'lib/states'], fu
         .select('text')
         .data(color.domain().reverse())
         .text(function(d) {
-          return utils.changeFormat(d);
+          var p = utils.changeFormat(d);
+          if(p !== '0%') {
+            p += '+';
+          }
+          return p;
         });
 
       yearChange();
