@@ -36,5 +36,6 @@ $RECYCLE.BIN/
 .ftppass
 
 # Build components that don't need to be saved
-public/dist
+public/dist/*
 public/fonts/index.html
+
