@@ -8,8 +8,8 @@
       $meta = array(
         'title' => 'Comparing 5 years of population changes in Texas county-by-county',
         'description' => 'Use our chart to explore annual population growth in Texas counties and each state by year.',
-        'thumbnail' => 'http://projects.statesman.com/news/census-2014-pops/assets/share.png',
-        'url' => 'http://projects.statesman.com/news/census-2014-pops/',
+        'thumbnail' => 'http://projects.statesman.com/news/census/estimates-2014/assets/share.png',
+        'url' => 'http://projects.statesman.com/news/census/estimates-2014/',
         'twitter' => 'statesman'
       );
     ?>
