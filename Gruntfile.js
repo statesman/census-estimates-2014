@@ -14,7 +14,7 @@ module.exports = function(grunt) {
     // Copy FontAwesome files to the fonts/ directory
     copy: {
       fonts: {
-        src: [
+         src: [
           'bower_components/font-awesome/fonts/**'
         ],
         dest: 'public/fonts/',
@@ -97,7 +97,7 @@ module.exports = function(grunt) {
           authKey: 'cmg'
         },
         src: 'public',
-        dest: '/stage_aas/projects/news/census-2014-pops',
+        dest: '/stage_aas/projects/news/census/estimates-2014',
         exclusions: ['dist/tmp','Thumbs.db'],
         simple: true,
         useList: false
@@ -109,7 +109,7 @@ module.exports = function(grunt) {
           authKey: 'cmg'
         },
         src: 'public',
-        dest: '/prod_aas/projects/news/census-2014-pops',
+        dest: '/prod_aas/projects/news/census/estimates-2014',
         exclusions: ['dist/tmp','Thumbs.db'],
         simple: true,
         useList: false
@@ -128,5 +128,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-ftpush');
 
   grunt.registerTask('default', ['jshint', 'clean', 'copy', 'less', 'requirejs']);
+  grunt.registerTask('stage', ['default','ftpush:stage']);
+  grunt.registerTask('prod', ['default','ftpush:prod']);
 
 };
